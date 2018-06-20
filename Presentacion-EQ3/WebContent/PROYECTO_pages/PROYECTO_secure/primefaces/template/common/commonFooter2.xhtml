@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+ 
+ 
+ <ui:composition>
+ 	 <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © Equipo3 2018</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top" style="display: none;">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">¿Listo para salir?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar </button>
+            <a class="btn btn-primary" href="https://blackrockdigital.github.io/startbootstrap-sb-admin/login.html">Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+ 	
+ 	<!-- Bootstrap core JavaScript-->
+    <script src="#{request.contextPath}/resources/js/bootstrap.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="#{request.contextPath}/resources/js/jquery_003.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="#{request.contextPath}/resources/js/jquery_002.js"></script>
+    <script src="#{request.contextPath}/resources/js/dataTables.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="#{request.contextPath}/resources/js/sb-admin.js"></script>
+    <!-- Custom scripts for this page-->
+    <script type="text/javascript" src="#{request.contextPath}/resources/js/core.xhtml"></script>
+ </ui:composition>
+ 
+ </html>

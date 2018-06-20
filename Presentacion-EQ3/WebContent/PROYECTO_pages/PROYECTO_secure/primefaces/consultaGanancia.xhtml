@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtmll/DTD/xhtmll-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<!-- header -->
+<ui:insert name="header">
+	<ui:include
+		src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonHeader.xhtml" />
+</ui:insert>
+
+<h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<!-- Navigator -->
+	<ui:insert name="header">
+		<ui:include
+			src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonNavigator.xhtml" />
+	</ui:insert>
+
+	<!-- Body -->
+
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<!-- Escribir Código aquí -->
+			<h3>Consultar Ganancias</h3>
+			<h:form id="form">
+				<p:growl id="msgs" showDetail="true" />
+				<!--  prefijo p , para usar primefaces -->
+
+				<h:panelGrid columns="5" cellpadding="5">
+					<p:outputLabel for="popup" value="Fecha:" />
+					<p:calendar id="popup" value="#{ventaBean.hoy}"
+						pattern="yyyy/MM/dd" />
+					<p:outputLabel value="Tipo:" />
+					<p:selectOneMenu id="console" style="width:125px"
+						value="#{ventaBean.opciones}">
+						<f:selectItem itemLabel="Seleccionar.." itemValue="fdf" />
+						<f:selectItem itemLabel="Dia" itemValue="Dia" />
+						<f:selectItem itemLabel="Semana" itemValue="Semana" />
+					</p:selectOneMenu>
+					<h:commandButton value="Buscar" update="consultaGanancias"
+						styleClass="btn btn-primary" />
+				</h:panelGrid>
+				<p:dataTable id="consultaGanancias" var="pro"
+					value="#{ventaBean.getGananciaList()}" editable="true"
+					style="margin-botton:20px">
+					<f:facet name="header">Ganancias por día</f:facet>
+					<p:column headerText="Fecha">
+						<h:outputText id="fecha" value="#{pro.fecha}">
+							<f:convertDateTime pattern="dd/MM/yyyy"
+								timeZone="America/Mexico_City" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Numero de venta">
+						<h:outputText id="numVenta" value="#{pro.numVenta}" />
+					</p:column>
+					<p:column headerText="Ganancia">
+						<h:outputText id="ganancia" value="#{pro.ganancia}">
+							<f:convertNumber pattern="#0.00" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Detalles">
+						<!-- h:outputLink id="Abrir" value="javascript:void(pro.numVenta)"
+							onclick="PF('widgetDlgAgregar').show();">Ver detalles...
+						</h:outputLink> -->
+						<p:commandButton update=":form:consultaNumVenta"
+							oncomplete="PF('widgetDlgAgregar').show()" icon="ui-icon-search"
+							title="View">
+							<f:setPropertyActionListener value="#{pro}"
+								target="#{ventaBean.ventaList3}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+
+				<p:dialog id="widgetDlgAgregar" widgetVar="widgetDlgAgregar"
+					modal="true" height="400">
+					<p:panel style="width: 800px;">
+						<p:dataTable id="consultaNumVenta" var="nv"
+							value="#{ventaBean.getNumVenta(ventaBean.ventaList3.numVenta)}"
+							editable="true" style="margin-botton:20px; font-size:12px;"
+							sortBy="#{ventaBean.ventaList3.ganancia}">
+							<f:facet name="header">Detalles de venta</f:facet>
+							<p:column headerText="Fecha">
+								<h:outputText id="fecha" value="#{nv.fecha}">
+									<f:convertDateTime pattern="dd/MM/yyyy"
+										timeZone="America/Mexico_City" />
+								</h:outputText>
+							</p:column>
+							<p:column headerText="Cantidad">
+								<h:outputText id="cantidad" value="#{nv.cantidad}" />
+							</p:column>
+							<p:column headerText="Tipo">
+								<h:outputText id="tipo" value="#{nv.tipo}" />
+							</p:column>
+							<p:column headerText="Marca">
+								<h:outputText id="marca" value="#{nv.marca}" />
+							</p:column>
+							<p:column headerText="Subtotal">
+								<h:outputText id="total" value="#{nv.precioVenta}">
+									<f:convertNumber pattern="#0.00" />
+								</h:outputText>
+							</p:column>
+							<p:summaryRow>
+								<p:column colspan="4" style="text-align:right">
+									<h:outputText value="Total:" />
+								</p:column>
+								<p:column>
+									<h:outputText value="#{ventaBean.ventaList3.ganancia}">
+										<f:convertNumber type="currency" currencySymbol="$" />
+									</h:outputText>
+								</p:column>
+							</p:summaryRow>
+
+						</p:dataTable>
+					</p:panel>
+				</p:dialog>
+			</h:form>
+		</div>
+	</div>
+	<!-- Footer -->
+	<ui:insert name="footer">
+		<ui:include
+			src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonFooter2.xhtml" />
+	</ui:insert>
+</h:body>
+</html>

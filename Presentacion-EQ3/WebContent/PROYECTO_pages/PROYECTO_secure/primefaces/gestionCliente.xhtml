@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtmll/DTD/xhtmll-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui = "http://java.sun.com/jsf/facelets"
+	xmlns:h = "http://java.sun.com/jsf/html"
+	xmlns:f = "http://java.sun.com/jsf/core"
+	xmlns:p= "http://primefaces.org/ui">
+	<!-- header -->
+	<ui:insert name="header">
+		<ui:include src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonHeader.xhtml"/>
+	</ui:insert>
+	
+	<h:body class="fixed-nav sticky-footer bg-dark" id="page-top" >
+		<!-- Navigator -->
+		<ui:insert name="header">
+			<ui:include src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonNavigator.xhtml"/>
+		</ui:insert>
+		
+		<!-- Body -->
+		<div class="content-wrapper">
+			<div class="container-fluid">
+				<!-- Escribir Código aquí -->
+				<br/>
+				<h:form id="form">
+				   <p:growl id="msgs" showDetail="true"/>
+			       <p:dataTable id="cliente" var="cli"  widgetVar="clientesTable" value = "#{clienteBean.getClienteList()}" scrollable="true" scrollHeight="530" editable="true" style="margin-botton:20px" filteredValue="#{clienteBean.filteredCliente}">
+				    	<f:facet name="header">Clientes(Modificar, Eliminar y Consultar)</f:facet>
+				    	<p:growl id="msgs" showDetail="true"/>
+			            <p:ajax event="rowEdit" listener="#{clienteBean.onRowEdit}" update=":form:msgs"/>
+			            <p:ajax  event="rowEditCancel" listener="#{clienteBean.onRowCancel}" update=":form:msgs"/>
+			            <p:column headerText="Id" style="width:50px">
+			            	<p:cellEditor>
+			                	<f:facet name="output">
+                                    <h:outputText value="#{cli.idCliente}"/>
+                                </f:facet>
+			                                
+                                <f:facet name="input">
+                                    <h:inputText id="clienteInput" value="#{cli.idCliente}" style="with::100%"></h:inputText>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+			                         
+			                         
+                        <p:column headerText="Nombre" style="width:150px" filterBy="#{cli.nombre}">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{cli.nombre}"/>
+                                </f:facet>
+                               
+                                <f:facet name="input">
+                                    <h:inputText value="#{cli.nombre}" style="with::100%" label="Nombre"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+			                         
+                        <p:column headerText="Domicilio" style="width:150px" filterBy="#{cli.domicilio}">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{cli.domicilio}"/>
+                                </f:facet>
+                               
+                                <f:facet name="input">
+                                    <h:inputText value="#{cli.domicilio}" style="with::100%" label="Domicilio"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                         <p:column headerText="RFC" style="width:130px" filterBy="#{cli.rfc}">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{cli.rfc}"/>
+                                </f:facet>
+                               
+                                <f:facet name="input">
+                                    <h:inputText value="#{cli.rfc}" style="with::100%" label="RFC"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column> 
+			                         
+                        <p:column headerText="Email" style="width:150px">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{cli.email}"/>
+                                </f:facet>
+                               
+                                <f:facet name="input">
+                                    <h:inputText value="#{cli.email}" style="with::100%" label="Email"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Teléfono" style="width:100px">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{cli.telefono}"/>
+                                </f:facet>
+                               
+                                <f:facet name="input">
+                                    <h:inputText value="#{cli.telefono}" style="with::100%" label="Teléfono"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+			                         
+                       
+                        <p:column style="width:32px">
+                            <p:rowEditor/>
+                        </p:column >    
+                         <p:column style="width:32px">
+			               <h:commandLink action="#{clienteBean.deleteCliente(cli)}" id="Eliminar" value="X" />
+			            </p:column>                                  
+			        </p:dataTable>
+			    </h:form>
+			</div>	
+		</div>
+		
+		<!-- Footer -->
+			<ui:insert name="footer">
+				<ui:include src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonFooter2.xhtml"/>
+			</ui:insert>
+	</h:body>
+</html>

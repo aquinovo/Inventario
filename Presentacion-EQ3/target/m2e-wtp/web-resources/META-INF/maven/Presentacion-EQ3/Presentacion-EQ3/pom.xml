@@ -1,0 +1,141 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>Inventario-EQ3</groupId>
+		<artifactId>Inventario-EQ3</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>Presentacion-EQ3</groupId>
+	<artifactId>Presentacion-EQ3</artifactId>
+	<packaging>war</packaging>
+	<version>6.3-SNAPSHOT</version>
+
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<repositories>
+		<!-- Agregar dependecias para primefaces -->
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url> http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>Servicio-EQ3</groupId>
+			<artifactId>Servicio-EQ3</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Spring web -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Primefaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>${primefaces.version}</version>
+		</dependency>
+
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<jsfVersion>Mojarra-2.3.2</jsfVersion>
+				<primefacesVersion>PrimeFaces-6.3-SNAPSHOT</primefacesVersion>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.primefaces</groupId>
+					<artifactId>primefaces</artifactId>
+					<version>6.3-SNAPSHOT</version>
+					
+					
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish</groupId>
+					<artifactId>javax.faces</artifactId>
+					<version>2.3.2</version>
+				</dependency>
+				<!-- MyFaces <dependency> <groupId>org.apache.myfaces.core</groupId> 
+					<artifactId>myfaces-api</artifactId> <version>2.3.0-beta</version> </dependency> 
+					<dependency> <groupId>org.apache.myfaces.core</groupId> <artifactId>myfaces-impl</artifactId> 
+					<version>2.3.0-beta</version> </dependency> -->
+			</dependencies>
+		</profile>
+		<profile>
+			<id>community-stable</id>
+			<properties>
+				<jsfVersion>Mojarra-2.3.2</jsfVersion>
+				<primefacesVersion>PrimeFaces-6.2</primefacesVersion>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.primefaces</groupId>
+					<artifactId>primefaces</artifactId>
+					<version>6.2</version>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish</groupId>
+					<artifactId>javax.faces</artifactId>
+					<version>2.3.2</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>elite-dev</id>
+			<properties>
+				<jsfVersion>Mojarra-2.3.2</jsfVersion>
+				<primefacesVersion>PrimeFaces-6.2.6-SNAPSHOT</primefacesVersion>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.primefaces</groupId>
+					<artifactId>primefaces</artifactId>
+					<version>6.2.6-SNAPSHOT</version>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish</groupId>
+					<artifactId>javax.faces</artifactId>
+					<version>2.3.2</version>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>elite-dev-6.1.x</id>
+			<properties>
+				<jsfVersion>Mojarra-2.3.2</jsfVersion>
+				<primefacesVersion>PrimeFaces-6.1.19-SNAPSHOT</primefacesVersion>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.primefaces</groupId>
+					<artifactId>primefaces</artifactId>
+					<version>6.1.19-SNAPSHOT</version>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish</groupId>
+					<artifactId>javax.faces</artifactId>
+					<version>2.3.2</version>
+				</dependency>
+			</dependencies>
+			
+			
+		</profile>
+	</profiles>
+</project>

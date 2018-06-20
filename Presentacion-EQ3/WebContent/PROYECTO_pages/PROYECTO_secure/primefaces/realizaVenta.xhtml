@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:insert name="header">
+	<ui:include
+		src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonHeader.xhtml" />
+</ui:insert>
+<h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<ui:insert name="header">
+		<ui:include
+			src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonNavigator.xhtml" />
+	</ui:insert>
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<div class="container">
+				<div class="card mx-2 mt-4">
+					<br/>
+					<div class="card-body">
+						<h:form>
+							<p:panel header="">
+								<h:panelGrid columns="4">
+									<h:outputLabel value="Cliente:" for="clientes" />
+									<p:selectOneMenu id="clientes"
+										value="#{selector.selectedCliente}"
+										valueChangeListener="#{selector.stateChangeListener}"
+										style="width: 150px;">
+										<f:selectItem itemLabel="" itemValue="" />
+										<f:selectItems value="#{selector.clientes}" />
+										<p:ajax event="change" update="clientes" />
+									</p:selectOneMenu>
+									<h:outputLabel value="Producto:" for="productos" />
+									<p:selectOneMenu id="productos"
+										value="#{selector.selectedProducto}" style="width: 150px;">
+										<f:selectItem itemLabel="" itemValue="" />
+										<f:selectItems value="#{selector.productos}" />
+										<p:ajax event="change" update="productos" />
+									</p:selectOneMenu>
+
+									<h:outputLabel for="cantidad" value="Cantidad:"
+										style="font-weight:bold" />
+									<p:inputText id="cantidad" value="#{selector.cantidad}" />
+									<p:commandButton value="Submit" update="infoVenta  contTotal" action="#{selector.setInfoVenta()}"
+										icon="ui-icon-check" />
+
+								</h:panelGrid>
+								<p>
+								</p>
+
+								<p:dataTable id="infoVenta" var="pro" editable="true"
+									value="#{selector.getInfoVenta()}"
+									style="margin-botton:20px" rendered="true">
+
+									<f:facet name="header">Información de la Venta</f:facet>
+									<p:column headerText="Cantidad">
+										<h:outputText value="#{pro.cantidad}"/>
+									</p:column>
+									<p:column headerText="Producto">
+										<h:outputText value="#{pro.descripcion}"/>
+									</p:column>
+									<p:column headerText="Descripcion">
+										<h:outputText value="#{pro.tipo}" />
+									</p:column>
+									<p:column headerText="Precio Unitario">
+										<h:outputText value="#{pro.precioVenta}" />
+									</p:column>
+									<p:column headerText="Subtotal">
+										<h:outputText value="#{pro.subtotal}" />
+									</p:column>
+								</p:dataTable>
+								<div  class="row">
+									<div class="col-sm-4"></div>
+									<div class="col-sm-5"></div>
+									<div class="col-sm-3">Total: $<h:outputLabel id="contTotal" value="#{selector.total}" /><br/>
+									</div>
+									<br/>
+									<div class="col-sm-8"></div>
+									<div class="col-sm-2">
+										<h:commandButton value="Confirmar Venta" action="#{selector.createVenta()}" styleClass="btn btn-primary" />
+									</div>
+									<div class="col-sm-2">
+										<h:commandButton value="Generar Factura" action="generarFactura.xhtml" styleClass="btn btn-primary" />
+									</div>
+									</div>
+								
+								
+							</p:panel>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<ui:insert name="footer">
+		<ui:include
+			src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonFooter2.xhtml" />
+	</ui:insert>
+</h:body>
+</html>

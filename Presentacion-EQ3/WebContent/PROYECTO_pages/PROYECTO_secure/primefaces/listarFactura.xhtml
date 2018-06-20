@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtmll/DTD/xhtmll-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<!-- header -->
+<ui:insert name="header">
+	<ui:include
+		src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonHeader.xhtml" />
+</ui:insert>
+
+<h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<!-- Navigator -->
+	<ui:insert name="header">
+		<ui:include
+			src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonNavigator.xhtml" />
+	</ui:insert>
+
+	<!-- Body -->
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<!-- Escribir Código aquí -->
+			<div class="container">
+					<div class="card-body">
+					<div class="row">
+						<div class="col align-self-end">
+							<h:form id="form" class="row justify-content-center">
+								<p:growl id="msgs" showDetail="true" />
+								<!--  prefijo p,para usar primefaces -->
+								<p:panel style="width: 500px;">
+								<p:dataTable id="basicDT" var="pro"
+									value="#{facturaBean.getAllFactura()}" editable="false"
+									style="margin-botton:20px">
+									<f:facet name="header">Facturas</f:facet>
+									<p:column headerText="idFactura">
+										<h:outputText value="#{pro.idFactura}" />
+									</p:column>
+									<p:column headerText="idVenta">
+										<h:outputText value="#{pro.idVenta}" />
+									</p:column>
+									<p:column headerText="numVenta">
+										<h:outputText value="#{pro.numVenta}" />
+									</p:column>
+									<p:column style="width:60px;text-align: center" headerText="Ver">
+										<p:commandButton update=":form:carDetail" oncomplete="PF('carDialog').show()"
+											icon="ui-icon-search" title="View">
+											<f:setPropertyActionListener value="#{pro}" target="#{facturaBean.facturaList}" />
+										</p:commandButton>
+									</p:column>
+								</p:dataTable>
+								</p:panel>		                        
+					                       
+								<p:dialog header="Informacion" widgetVar="carDialog" modal="true"
+									showEffect="fade" hideEffect="fade" resizable="false">
+					                   <p:panel style="width: 800px;">
+					                       <p:dataTable id="carDetail" var="nv"
+					                           value="#{facturaBean.getFacturaDetalle(facturaBean.facturaList.numVenta)}" editable="true"
+					                           style="margin-botton:20px; font-size:12px;" sortBy="#{facturaBean.facturaList.numVenta}">
+					
+					                           <f:facet name="header">Detalles de factura</f:facet>
+					                           
+					                           <p:column headerText="Cantidad">
+					                               <h:outputText id="cantidad" value="#{nv.cantidad}" />
+					                           </p:column>
+					                           <p:column headerText="Descripcion">
+					                               <h:outputText id="descripcion" value="#{nv.descripcion}" />
+					                           </p:column>
+					                           <p:column headerText="Importe">
+					                               <h:outputText id="importe" value="$ #{nv.importe}" />                                
+					                           </p:column>
+					                           
+					                            <p:summaryRow>
+					                               <p:column colspan="2" style="text-align:right">
+					                                   <h:outputText value="Total:" />
+					                               </p:column>
+					                               <p:column>
+					                                   <h:outputText value="#{facturaBean.getTotalVentaDetalle(facturaBean.facturaList.numVenta).total}">
+					                                       <f:convertNumber type="currency" currencySymbol="$" />
+					                                   </h:outputText>
+					                               </p:column>
+					                           </p:summaryRow>
+					                           
+					                       </p:dataTable>
+					                   </p:panel>
+					               </p:dialog>
+							</h:form>
+						</div>
+					
+					</div>	
+					</div>
+			</div>
+		</div>
+	</div>
+	<ui:insert name="footer">
+		<ui:include
+			src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonFooter2.xhtml" />
+	</ui:insert> 
+</h:body>
+</html>

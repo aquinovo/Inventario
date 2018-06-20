@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtmll/DTD/xhtmll-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui = "http://java.sun.com/jsf/facelets"
+	xmlns:h = "http://java.sun.com/jsf/html"
+	xmlns:p = "http://primefaces.org/ui"
+	xmlns:f = "http://java.sun.com/jsf/core">
+	<!-- header -->
+	<ui:insert name="header">
+		<ui:include src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonHeader.xhtml"/>
+	</ui:insert>
+	
+	<h:body class="fixed-nav sticky-footer bg-dark" id="page-top" >
+		<!-- Navigator -->
+		<ui:insert name="header">
+			<ui:include src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonNavigator.xhtml"/>
+		</ui:insert>
+		
+		
+		
+		<!-- Body -->
+		<div class="content-wrapper">
+		
+		
+			<div class="container-fluid">
+					<div class="container">
+				    <div class="card mx-2 mt-4">
+				      <div class="card-header">Registrar Cliente</div>
+				      
+				      <h:form>
+				      <p:growl id="messages" showDetail="true" sticky="false" life="5000" />
+					  <!-- <p:messages id="messages" showDetail="true" sticky="false" life="1000"> 
+					        
+					    </p:messages>-->
+					    
+					 
+					    <!-- <p:commandButton value="Info" actionListener="#{messagesView.info}" />-->
+					    
+					</h:form>
+				      <div class="card-body">
+				        <h:form id="ClienteForm">
+				          <div class="form-group">
+				            <div class="form-row">
+				              <div class="col-md-6">
+				                <label for="exampleInputName">Nombre</label>
+				                <h:inputText value="#{clienteBean.firstName}" styleClass="form-control" />
+				                </div>
+				              <div class="col-md-6">
+				                <label for="exampleInputLastName">RFC</label>
+				                <h:inputText value="#{clienteBean.rfc}" styleClass="form-control" />
+				                </div>
+				            </div>
+				          </div>
+				          <div class="form-group">
+				            <div class="form-row">
+				              <div class="col-md-6">
+				                <label for="exampleInputName">Email</label>
+				                <h:inputText value="#{clienteBean.email}" styleClass="form-control" />
+				                </div>
+				              <div class="col-md-6">
+				                <label for="exampleInputLastName">Teléfono</label>
+				                <h:inputText value="#{clienteBean.telefono}" styleClass="form-control" />
+				                </div>
+				            </div>
+				          </div>
+				          <div class="form-group">
+				            <label for="exampleInputEmail1">Domicilio</label>
+				            <h:inputText value="#{clienteBean.domicilio}" styleClass="form-control" />
+				          </div>
+				         
+				          <!-- <a class="btn btn-primary btn-block" href="login.html">Register</a>-->
+				          <div class="row">
+				          	<div class="col-md-4 offset-md-10">
+				          		<h:commandLink value="Registrar" action="#{clienteBean.createCliente}" styleClass="btn btn-primary"  id="A23"/>
+				        
+				          	</div>
+				          </div>
+				          
+				           </h:form>
+				           
+				           
+				        <!-- <div class="text-center">
+				          <a class="d-block small mt-3" href="login.html">Login Page</a>
+				          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+				        </div>-->
+				      </div>
+				    </div>
+				  </div>
+			</div>	
+		</div>
+		
+		
+		
+		<!-- Footer -->
+			<ui:insert name="footer">
+				<ui:include src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonFooter.xhtml"/>
+			</ui:insert>
+	</h:body>
+</html>

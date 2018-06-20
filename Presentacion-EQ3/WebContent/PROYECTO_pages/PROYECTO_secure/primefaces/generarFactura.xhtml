@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtmll/DTD/xhtmll-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<!-- header -->
+<ui:insert name="header">
+	<ui:include
+		src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonHeader.xhtml" />
+</ui:insert>
+
+<h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<!-- Navigator -->
+	<ui:insert name="header">
+		<ui:include
+			src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonNavigator.xhtml" />
+	</ui:insert>
+
+	<!-- Body -->
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<!-- Escribir Código aquí -->
+			<h2>Generar Factura</h2>
+
+			<h4 class="text-center">Muebleria y Linea blanca PANCAS S.A de C.V</h4>
+			<div class="row">
+                <div class="col-sm-2">
+                    <img src="#{request.contextPath}/resources/images/logo2.jpg"
+                        alt="imagen" class="img-rounded" height="150" width="150" />
+                </div>
+                <div class="col-sm-5">
+                    <h:form id="izquierda">
+                        <h:panelGrid columns="4">
+                            <h:outputLabel for="rfc" value="RFC: " style="font-weight:bold" />
+                            <h:outputText var="cliente"
+                                value="#{facturaBean.getDatosFactura().rfc}" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="4">
+                            <h:outputLabel for="rfc" value="Nombre: " style="font-weight:bold" />
+                            <h:outputText var="cliente"
+                                value="#{facturaBean.getDatosFactura().nombre}" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="4">
+                            <h:outputLabel for="direccion" value="Dirección:  "
+                                style="font-weight:bold" />
+                            <h:outputText var="cliente"
+                                value="#{facturaBean.getDatosFactura().domicilio}" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="4">
+                            <h:outputLabel for="email" value="Email:  "
+                                style="font-weight:bold" />
+                            <h:outputText var="cliente"
+                                value="#{facturaBean.getDatosFactura().email}" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="4">
+                            <h:outputLabel for="telefono" value="Teléfono:  "
+                                style="font-weight:bold" />
+                            <h:outputText var="cliente"
+                                value="#{facturaBean.getDatosFactura().telefono}" />
+                        </h:panelGrid>                       
+                    </h:form>                    
+                </div> 
+                <div class="col-sm-5">
+                    <h:form id="derecha">
+                        <h:panelGrid columns="4">
+                            <h:outputLabel for="rfc" value="N° de Factura: "
+                                style="font-weight:bold" />
+                            <h:outputText var="cliente"
+                                value="A-00#{facturaBean.getNumVenta()}" />
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="4">
+                            <h:outputLabel for="nombre" value="Fecha de elaboracion:  "
+                                style="font-weight:bold" />
+                            <h:outputText var="cliente"
+                                value="#{facturaBean.getDatosFactura().fecha}" >
+                                    <f:convertDateTime pattern="dd/MM/yyyy"
+                                                    timeZone="America/Mexico_City" />
+                                </h:outputText>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+			<!-- Tabla para mostrar las ventas -->
+			
+			<h:dataTable value="#{facturaBean.getFacturaAll()}" var="cli"
+                styleClass="order-table" headerClass="order-table-header"
+                rowClasses="order-table-add-row.order-table-event-row"
+                class="table table-bordered">
+                <h:column>
+                    <f:facet name="header">Cantidad</f:facet>
+                    #{cli.cantidad}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Descripción</f:facet>
+                    #{cli.descripcion}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Precio Unitario</f:facet>
+                    $ #{cli.precioVenta}                   
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Importe</f:facet>
+                    $ #{cli.importe}                    
+            	</h:column>            	           
+            </h:dataTable>
+            <div class="row">
+                <div class="col-md-4 offset-md-9">
+                    <h:outputLabel for="total" value="Total:$"
+                        style="font-weight:bold" />
+                    <h:outputText var="cliente"
+                        value="#{facturaBean.getTotalVenta().total}">
+                         <f:convertNumber pattern="#0.00" />
+                    </h:outputText>
+                </div>
+            </div>        
+			<h:form id="botones">
+				<div class="row">
+					<div class="col-md-6"></div>
+					<div class="row justify-content-around">
+						<div class="col-4">
+							<h:link value="Cancelar"
+								outcome="/PROYECTO_pages/PROYECTO_secure/primefaces/index"
+								styleClass="btn btn-primary" />
+						</div>
+						<div class="col-4">
+							<h:commandButton value="Registrar"
+								action="#{facturaBean.createFactura()}"
+								styleClass="btn btn-primary"
+								onclick="alert('Factura registrada');" />
+						</div>
+					</div>
+				</div>
+			</h:form>			
+		</div>
+	</div>
+	<!-- Footer -->
+	<ui:insert name="footer">
+		<ui:include
+			src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonFooter.xhtml" />
+	</ui:insert>
+</h:body>
+</html>

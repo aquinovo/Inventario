@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtmll/DTD/xhtmll-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<!-- header -->
+<ui:insert name="header">
+	<ui:include
+		src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonHeader.xhtml" />
+</ui:insert>
+
+<h:body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<!-- Navigator -->
+	<ui:insert name="header">
+		<ui:include
+			src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonNavigator.xhtml" />
+	</ui:insert>
+
+	<!-- Body -->
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<!-- Escribir Código aquí -->
+			<h2>Consultar ganancias</h2>
+			<div class="card mb-3">
+				<div class="card-body">
+					<div class="table-responsive">
+						<h:form id="consultar">
+							<p:dataTable id="tbl" var="venta"
+								value="#{ventaBean.getVentaList()}"
+								paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+								paginator="true" rows="10" style="margin-bottom:20px">
+								<p:column headerText="Fecha" style="width:150px"
+									filterBy="#{venta.fecha}">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{venta.fecha}">
+												<f:convertDateTime pattern="dd/MM/yyyy"
+													timeZone="America/Mexico_City" />
+											</h:outputText>
+										</f:facet>
+
+										<f:facet name="input">
+											<h:inputText value="#{venta.fecha}" style="with::100%"
+												label="Nombre" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column headerText="Descripcion" style="width:150px"
+									filterBy="#{venta.descripcion}">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{venta.descripcion}">
+											</h:outputText>
+										</f:facet>
+
+										<f:facet name="input">
+											<h:inputText value="#{venta.descripcion}" style="with::100%"
+												label="sku" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column headerText="Tipo" style="width:150px"
+									filterBy="#{venta.tipo}">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{venta.tipo}">
+											</h:outputText>
+										</f:facet>
+
+										<f:facet name="input">
+											<h:inputText value="#{venta.tipo}" style="with::100%"
+												label="tipo" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column headerText="Marca" style="width:150px"
+									filterBy="#{venta.marca}">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{venta.marca}">
+											</h:outputText>
+										</f:facet>
+
+										<f:facet name="input">
+											<h:inputText value="#{venta.marca}" style="with::100%"
+												label="marca" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+								<p:column headerText="Precio" style="width:150px"
+									filterBy="#{venta.producto.precioVenta}">
+									<p:cellEditor>
+										<f:facet name="output">
+											<h:outputText value="#{venta.producto.precioVenta}">
+											</h:outputText>
+										</f:facet>
+
+										<f:facet name="input">
+											<h:inputText value="#{venta.producto.precioVenta}" style="with::100%"
+												label="PrecioV" />
+										</f:facet>
+									</p:cellEditor>
+								</p:column>
+							</p:dataTable>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Footer -->
+	<ui:insert name="footer">
+		<ui:include
+			src="/PROYECTO_pages/PROYECTO_secure/primefaces/template/common/commonFooter2.xhtml" />
+	</ui:insert>
+</h:body>
+</html>
